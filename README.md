@@ -39,16 +39,6 @@ This project implements a **Traffic Classifier** using the POX Software Defined 
 
 ---
 
-##  Project Structure
-
-```
-traffic-classifier-project/
-│
-├── traffic_classifier.py   # Main classification logic
-├── README.md               # Project documentation
-└── screenshots/            # Output images (optional)
-```
-
 ---
 
 ## ▶️ How to Run
