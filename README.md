@@ -41,7 +41,7 @@ This project implements a **Traffic Classifier** using the POX Software Defined 
 
 ---
 
-## ▶️ How to Run
+## How to Run
 
 ###  Start POX Controller
 
