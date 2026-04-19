@@ -1,152 +1,132 @@
-#  Traffic Classification using POX (SDN)
+# 🚦 SDN Traffic Classification and Analysis using POX
 
-##  Project Overview
+## 📌 Project Overview
 
-This project implements a **Traffic Classifier** using the POX Software Defined Networking (SDN) controller. It monitors network traffic in real-time and classifies packets into different types based on protocol.
+This project implements a **Software Defined Networking (SDN)** based traffic classification and analysis system using the **POX controller** and **Mininet**.
 
----
+It captures packets from the network, classifies them into:
 
-##  Objectives
+* TCP
+* UDP
+* ICMP
+* Other
 
-* Classify network traffic into:
-
-  * **ICMP (Ping)**
-  * **UDP (iperf)**
-  * **TCP (HTTP / wget)**
-* Understand SDN architecture using POX and Mininet
-* Analyze real-time packet flow in a network
----
-
-##  Technologies Used
-
-* **Python 3.8**
-* **POX Controller**
-* **Mininet Network Emulator**
-* **OpenFlow Protocol**
+and provides **traffic distribution analysis** before and after a traffic spike.
 
 ---
 
-##  How It Works
+## 🎯 Objectives
 
-* The POX controller listens for **PacketIn events**
-* Each incoming packet is analyzed
-* Based on protocol type:
-
-  * ICMP → Printed as *ICMP Packet*
-  * UDP → Printed as *UDP Packet*
-  * TCP → Printed as *TCP Packet*
-* Other packets (like ARP) are classified as *Other Packet*
+* Identify TCP, UDP, ICMP packets
+* Maintain packet statistics
+* Analyze traffic distribution
+* Compare network behavior before and after spike
 
 ---
 
+## 🛠️ Technologies Used
+
+* Python
+* POX Controller
+* Mininet
+* OpenFlow Protocol
+* Ubuntu (Linux)
+
 ---
 
-## How to Run
+## 🧠 Working Principle
 
-###  Start POX Controller
+1. Mininet creates a virtual network (hosts + switch)
+2. Switch sends packets to POX controller (PacketIn)
+3. Controller:
 
+   * Reads raw packet data
+   * Identifies protocol (TCP/UDP/ICMP)
+   * Updates counters
+4. Traffic is divided into:
+
+   * **Before Spike**
+   * **After Spike**
+5. Final analysis is displayed when program stops
+
+---
+
+## ⚙️ How to Run
+
+### Step 1: Clean Environment
+
+```bash
+sudo mn -c
+pkill -f pox
 ```
+
+### Step 2: Run POX Controller
+
+```bash
 cd ~/pox
-python3.8 pox.py forwarding.l2_learning traffic_classifier
+python3.8 pox.py your_file_name
 ```
 
----
+### Step 3: Start Mininet
 
-### Start Mininet
-
-```
+```bash
 sudo mn --controller=remote,ip=127.0.0.1,port=6633 --topo single,3
 ```
 
----
+### Step 4: Generate Traffic
 
-###  Test Connectivity
-
-```
+```bash
 pingall
-```
-
----
-
-###  Generate Traffic
-
-#### ICMP (Ping)
-
-```
 h1 ping h2
-```
-
-#### UDP (iperf)
-
-```
 h1 iperf -s -u &
 h2 iperf -c 10.0.0.1 -u
 ```
 
-#### TCP (HTTP)
+### Step 5: Stop and View Analysis
 
-```
-h1 python3 -m http.server 80 &
-h2 wget http://10.0.0.1
+Press:
+
+```bash
+Ctrl + C
 ```
 
 ---
 
-## Expected Output
-
-In POX controller terminal:
+## 📊 Sample Output
 
 ```
-ICMP Packet
-UDP Packet
-TCP Packet
+=========== BEFORE SPIKE ==========
+TYPE     TOTAL     PERCENT     AVG PPS
+TCP      0         0.00%       0.00
+UDP      0         0.00%       0.00
+ICMP     18        36.00%      0.46
+OTHER    32        64.00%      0.82
+
+=========== AFTER SPIKE ==========
+TCP      12        23.08%      ...
+UDP      4         7.69%       ...
 ```
-```
-## Proof of Execution
-###  POX Controller Started
-<img width="820" height="613" alt="WhatsApp Image 2026-04-16 at 10 41 32 AM" src="https://github.com/user-attachments/assets/35155fbd-90bb-49f1-8985-faf2f0f2e575" />
-Controller started + switch connected + background packets detected
-```
-```
-### ICMP Traffic Classification Output in POX Controller
 
-<img width="813" height="619" alt="WhatsApp Image 2026-04-16 at 10 41 52 AM" src="https://github.com/user-attachments/assets/3b939f91-1a67-45de-90c0-a621e0132193" />
-```
-```
-###UDP & TCP Traffic Classification in POX Controller
-<img width="496" height="252" alt="WhatsApp Image 2026-04-16 at 10 44 41 AM" src="https://github.com/user-attachments/assets/63f897db-1785-427c-960d-93a24791089b" />
-```
-```
-###Mininet Network Setup and Connectivity Test
-<img width="809" height="619" alt="WhatsApp Image 2026-04-16 at 10 45 22 AM" src="https://github.com/user-attachments/assets/8310250c-0d64-4ab0-a15d-f57e0b05a0cf" />
-```
-```
-###ICMP Ping Communication Between Hosts (h1 → h2)
-<img width="811" height="613" alt="WhatsApp Image 2026-04-16 at 10 45 45 AM" src="https://github.com/user-attachments/assets/293e90a1-4038-447c-8d84-2ef2091492a4" />
-```
-```
-###UDP Traffic Generation using iperf
-<img width="814" height="619" alt="WhatsApp Image 2026-04-16 at 10 46 21 AM" src="https://github.com/user-attachments/assets/7b6a545d-9479-4d55-a147-f91756a5a375" />
-```
-```
-###TCP Traffic (HTTP Communication using wget)
-<img width="812" height="608" alt="WhatsApp Image 2026-04-16 at 10 46 42 AM" src="https://github.com/user-attachments/assets/f7302d3d-0457-4b48-a31f-bc94fff3b168" />
+---
 
+## 🔍 Key Features
 
+* Real-time packet classification
+* Safe packet parsing (no crashes)
+* Traffic distribution analysis
+* Before vs After comparison
+* Works with TCP, UDP, ICMP traffic
 
+---
 
+## 📚 Concepts Used
 
+* SDN (Software Defined Networking)
+* OpenFlow
+* PacketIn events
+* Traffic Analysis
+* Network Protocols (TCP, UDP, ICMP)
 
-
-
-
-
-
-
-
-
-
-
-
+---
 
 
