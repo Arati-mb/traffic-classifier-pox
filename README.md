@@ -160,24 +160,24 @@ OTHER    ...
 ## Proof of Execution
 
 ### 🔹 Controller Side (POX)
- POX Controller Startup and Initial Packet Monitoring
- ![Screenshot](screenshots/1.jpeg)
-```
-ICMP Packet Classification by POX Controller
- ![Screenshot](screenshots/2.jpeg)
-```
-UDP Packet Detection using iperf Traffic
- ![Screenshot](screenshots/3.jpeg)
- ```
-TCP Packet Detection and Final Traffic Analysis (Before vs After Spike)
-  ![Screenshot](screenshots/3.jpeg)
+POX Controller Startup and Initial Packet Monitoring  
+![Screenshot](screenshots/1.jpeg)
+
+ICMP Packet Classification by POX Controller  
+![Screenshot](screenshots/2.jpeg)
+
+UDP Packet Detection using iperf Traffic  
+![Screenshot](screenshots/3.jpeg)
+
+TCP Packet Detection and Final Traffic Analysis  
+![Screenshot](screenshots/4.jpeg)
 
 
 ### 🔹 Traffic Generator Side (Mininet CLI)
  ![Screenshot](screenshots/k1.jpeg)
- ![Screenshot](screenshots/k2.jpeg)
- ![Screenshot](screenshots/k3.jpeg)
- ![Screenshot](screenshots/k4.jpeg)
+![Screenshot](screenshots/k2.jpeg)
+![Screenshot](screenshots/k3.jpeg)
+![Screenshot](screenshots/k4.jpeg)
 
 
 
